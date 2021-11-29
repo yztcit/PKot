@@ -2,7 +2,6 @@ package com.nttn.pkot.view.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nttn.pkot.data.model.User
 import com.nttn.pkot.data.repository.MainRepository
 import com.nttn.pkot.view.intent.MainIntent
 import com.nttn.pkot.view.viewstate.MainState
@@ -38,32 +37,10 @@ class MainViewModel(private val repository: MainRepository) : ViewModel() {
         viewModelScope.launch {
             _state.value = MainState.Loading
             _state.value = try {
-                //MainState.Users(repository.getUsers())
-                MainState.Users(fakeUsers())
+                MainState.Users(repository.getUsers())
             } catch (e: Exception) {
                 MainState.Error(e.localizedMessage)
             }
         }
     }
-
-    private fun fakeUsers() = listOf(
-        User(
-            1,
-            "A",
-            "123@qq.com",
-            "https://www.czhuihao.cn/uploadfile/2020/0516/20200516040525553.jpeg"
-        ),
-        User(
-            2,
-            "B",
-            "223@qq.com",
-            "https://www.czhuihao.cn/uploadfile/2020/0516/20200516040525553.jpeg"
-        ),
-        User(
-            3,
-            "C",
-            "323@qq.com",
-            "https://www.czhuihao.cn/uploadfile/2020/0516/20200516040525553.jpeg"
-        )
-    )
 }

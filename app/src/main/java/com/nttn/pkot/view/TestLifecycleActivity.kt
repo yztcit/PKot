@@ -43,7 +43,7 @@ class TestLifecycleActivity : BaseVBActivity<TestLifecycleBinding>() {
         }
 
         mainViewModel =
-            ViewModelProviders.of(this, ViewModelFactory(ApiHelperImpl(RetrofitBuilder.apiService)))
+            ViewModelProviders.of(this, ViewModelFactory(ApiHelperImpl(RetrofitBuilder.createService())))
                 .get(MainViewModel::class.java)
 
         lifecycleScope.launch {

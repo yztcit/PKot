@@ -1,15 +1,19 @@
 package com.nttn.pkot.data
 
 import com.nttn.pkot.HttpLoggingInterceptor
-import com.nttn.pkot.data.api.ApiService
+import com.nttn.pkot.base.BaseService
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 import java.util.logging.Level
 
+/**
+ * 接口通过Rap2 mock
+ * @see <a href="http://rap2.taobao.org/repository/editor?id=294816&itf=2147814">Rap2 mock api</a>
+ */
 object RetrofitBuilder {
-    private const val BASE_URL = "https://test.mockapi.io/"
+    private const val BASE_URL = "http://rap2api.taobao.org/app/mock/294816/"
     private const val DEFAULT_MILLISECONDS = 60000L
 
     private fun getOkHttpClient() = OkHttpClient.Builder().let {
@@ -24,12 +28,11 @@ object RetrofitBuilder {
     }.build()
 
 
-    private fun getRetrofit() = Retrofit.Builder()
+    fun getRetrofit(): Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .client(getOkHttpClient())
         .addConverterFactory(MoshiConverterFactory.create())
         .build()
 
-    val apiService: ApiService = getRetrofit().create(ApiService::class.java)
-
+    inline fun <reified T : BaseService> createService(): T = getRetrofit().create(T::class.java)
 }
