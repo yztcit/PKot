@@ -16,23 +16,26 @@ object RetrofitBuilder {
     private const val BASE_URL = "http://rap2api.taobao.org/app/mock/294816/"
     private const val DEFAULT_MILLISECONDS = 60000L
 
-    private fun getOkHttpClient() = OkHttpClient.Builder().let {
-        it.readTimeout(DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS)
-        it.writeTimeout(DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS)
-        it.connectTimeout(DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS)
+    val rtf: Retrofit by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .client(client)
+            .addConverterFactory(MoshiConverterFactory.create())
+            .build()
+    }
 
-        it.addInterceptor(HttpLoggingInterceptor("PKot").apply {
-            setPrintLevel(HttpLoggingInterceptor.Level.BODY)
-            setColorLevel(Level.INFO)
-        })
-    }.build()
+    private val client: OkHttpClient by lazy {
+        OkHttpClient.Builder().let {
+            it.readTimeout(DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS)
+            it.writeTimeout(DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS)
+            it.connectTimeout(DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS)
 
+            it.addInterceptor(HttpLoggingInterceptor("PKot").apply {
+                setPrintLevel(HttpLoggingInterceptor.Level.BODY)
+                setColorLevel(Level.INFO)
+            })
+        }.build()
+    }
 
-    fun getRetrofit(): Retrofit = Retrofit.Builder()
-        .baseUrl(BASE_URL)
-        .client(getOkHttpClient())
-        .addConverterFactory(MoshiConverterFactory.create())
-        .build()
-
-    inline fun <reified T : BaseService> createService(): T = getRetrofit().create(T::class.java)
+    inline fun <reified T : BaseService> createService(): T = rtf.create(T::class.java)
 }
