@@ -1,4 +1,4 @@
 package com.nttn.pkot.base
 
-interface BaseService {
+interface BaseApiService {
 }

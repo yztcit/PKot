@@ -2,17 +2,19 @@ package com.nttn.pkot.view
 
 import android.content.Intent
 import android.view.View
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.blankj.utilcode.util.ToastUtils
+import com.nttn.pkot.GlobalHelper
 import com.nttn.pkot.R
 import com.nttn.pkot.TestLifecycleBinding
 import com.nttn.pkot.base.BaseVBActivity
 import com.nttn.pkot.data.RetrofitBuilder
 import com.nttn.pkot.data.api.ApiHelperImpl
 import com.nttn.pkot.data.model.User
+import com.nttn.pkot.util.provideViewModel
 import com.nttn.pkot.view.adapter.UserAdapter
 import com.nttn.pkot.view.intent.MainIntent
 import com.nttn.pkot.view.viewmodel.MainViewModel
@@ -22,15 +24,15 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class TestLifecycleActivity : BaseVBActivity<TestLifecycleBinding>() {
-    @ExperimentalCoroutinesApi
-    private lateinit var mainViewModel: MainViewModel
+@ExperimentalCoroutinesApi
+class TestLifecycleActivity : BaseVBActivity<TestLifecycleBinding, MainViewModel>() {
     private val mAdapter = UserAdapter(arrayListOf())
 
     override fun getLayoutId() = R.layout.activity_test_lifecycle
 
     @ExperimentalCoroutinesApi
     override fun initView() {
+        mViewModel.showWatermark = false
         mBinding.recyclerview.layoutManager = LinearLayoutManager(this)
         mBinding.recyclerview.apply {
             addItemDecoration(
@@ -42,12 +44,8 @@ class TestLifecycleActivity : BaseVBActivity<TestLifecycleBinding>() {
             adapter = mAdapter
         }
 
-        mainViewModel =
-            ViewModelProviders.of(this, ViewModelFactory(ApiHelperImpl(RetrofitBuilder.createService())))
-                .get(MainViewModel::class.java)
-
         lifecycleScope.launch {
-            mainViewModel.state.collect {
+            mViewModel.state.collect {
                 when (it) {
                     is MainState.Idle -> {
                     }
@@ -72,10 +70,13 @@ class TestLifecycleActivity : BaseVBActivity<TestLifecycleBinding>() {
 
         mBinding.btnFetchUser.setOnClickListener {
             lifecycleScope.launch {
-                mainViewModel.userIntent.send(MainIntent.FetchUser)
+                mViewModel.userIntent.send(MainIntent.FetchUser)
             }
         }
     }
+
+    override fun configProviderFactory() =
+        ViewModelFactory(ApiHelperImpl(RetrofitBuilder.createService()))
 
     private fun renderList(users: List<User>) {
         users.let {

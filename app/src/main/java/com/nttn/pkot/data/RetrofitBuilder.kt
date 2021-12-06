@@ -1,7 +1,6 @@
 package com.nttn.pkot.data
 
-import com.nttn.pkot.HttpLoggingInterceptor
-import com.nttn.pkot.base.BaseService
+import com.nttn.pkot.base.BaseApiService
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -37,5 +36,5 @@ object RetrofitBuilder {
         }.build()
     }
 
-    inline fun <reified T : BaseService> createService(): T = rtf.create(T::class.java)
+    inline fun <reified T : BaseApiService> createService(): T = rtf.create(T::class.java)
 }

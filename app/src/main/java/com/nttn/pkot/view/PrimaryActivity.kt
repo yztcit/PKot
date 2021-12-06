@@ -5,9 +5,11 @@ import android.content.Intent
 import com.nttn.pkot.PrimaryActivityBinding
 import com.nttn.pkot.R
 import com.nttn.pkot.base.BaseVBActivity
+import com.nttn.pkot.base.BaseViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlin.random.Random
 
-class PrimaryActivity : BaseVBActivity<PrimaryActivityBinding>() {
+class PrimaryActivity : BaseVBActivity<PrimaryActivityBinding, BaseViewModel>() {
 
     companion object {
         fun actionStart(context: Context) {
@@ -17,6 +19,7 @@ class PrimaryActivity : BaseVBActivity<PrimaryActivityBinding>() {
 
     override fun getLayoutId(): Int = R.layout.activity_primary
 
+    @ExperimentalCoroutinesApi
     override fun initView() {
         mBinding.btnPrimary.setOnClickListener {
             startActivity(Intent(this, TestLifecycleActivity::class.java))

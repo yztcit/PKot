@@ -1,23 +1,96 @@
 package com.nttn.pkot.base
 
 import android.os.Bundle
+import android.view.KeyEvent
+import android.view.LayoutInflater
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import com.blankj.utilcode.util.LogUtils
+import com.blankj.utilcode.util.ToastUtils
+import com.nttn.pkot.BaseMarkBinding
+import com.nttn.pkot.GlobalHelper
+import com.nttn.pkot.R
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import java.lang.reflect.ParameterizedType
+import kotlin.system.exitProcess
 
-abstract class BaseVBActivity<VB : ViewDataBinding> : AppCompatActivity() {
+@ExperimentalCoroutinesApi
+abstract class BaseVBActivity<VB : ViewDataBinding, VM : BaseViewModel> : AppCompatActivity() {
     lateinit var mBinding: VB
+    lateinit var mViewModel: VM
 
-    @LayoutRes abstract fun getLayoutId() : Int
+    private var exitTime: Long = 0
+    private lateinit var baseBinding: BaseMarkBinding
+
+    @LayoutRes
+    abstract fun getLayoutId(): Int
 
     abstract fun initView()
+
+    protected open fun exitAfterTwice(): Boolean {
+        return false
+    }
+
+    open fun configProviderFactory(): ViewModelProvider.Factory? = null
+
+    private fun configViewModel() {
+        // Actually ParameterizedType will give us actual type parameters
+        val parameterizedType = javaClass.genericSuperclass as? ParameterizedType
+
+        // now get first actual class, which is the class of VM (ProfileVM in this case)
+        @Suppress("UNCHECKED_CAST")
+        val vmClass = parameterizedType?.actualTypeArguments?.getOrNull(1) as? Class<VM>?
+
+        if (vmClass != null) {
+            mViewModel = ViewModelProviders.of(this, configProviderFactory()).get(vmClass)
+        } else {
+            LogUtils.e("cannot find VM class for $this")
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mBinding = DataBindingUtil.setContentView(this, getLayoutId())
+        baseBinding = DataBindingUtil.setContentView(this, R.layout.layout_base_watermark)
+        configViewModel()
+
+        baseBinding.contentLayout.let {
+            mBinding = DataBindingUtil.inflate(LayoutInflater.from(this), getLayoutId(), it, true)
+
+            it.removeAllViews()
+            it.addView(mBinding.root)
+        }
 
         initView()
+
+        //showWatermark
+        if (mViewModel.showWatermark) {
+            GlobalHelper.watermark.observe(this) { baseBinding.watermark.setImageBitmap(it) }
+        }
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+        if (!exitAfterTwice()) return super.onKeyDown(keyCode, event)
+        if (KeyEvent.ACTION_DOWN == event.action && KeyEvent.KEYCODE_BACK == keyCode) {
+            if (System.currentTimeMillis() - exitTime > 2000) {
+                ToastUtils.showShort("再按一次退出程序")
+                exitTime = System.currentTimeMillis()
+            } else {
+                GlobalHelper.recycleWatermark()
+                finish()
+                exitProcess(0)
+            }
+            return true
+        }
+        return super.onKeyDown(keyCode, event)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        GlobalHelper.watermark.removeObservers(this)
     }
 }

@@ -14,6 +14,7 @@ class CuzApplication: Application() {
         super.onCreate()
         registerActivityLifecycleCallbacks(CuzLifecycle())
         initLog()
+        GlobalHelper.generateWatermark(getString(R.string.app_name))
     }
 
     private fun initLog() {
