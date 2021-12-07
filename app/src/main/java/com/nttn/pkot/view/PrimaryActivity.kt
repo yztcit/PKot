@@ -9,6 +9,7 @@ import com.nttn.pkot.base.BaseViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlin.random.Random
 
+@ExperimentalCoroutinesApi
 class PrimaryActivity : BaseVBActivity<PrimaryActivityBinding, BaseViewModel>() {
 
     companion object {
@@ -19,7 +20,6 @@ class PrimaryActivity : BaseVBActivity<PrimaryActivityBinding, BaseViewModel>() 
 
     override fun getLayoutId(): Int = R.layout.activity_primary
 
-    @ExperimentalCoroutinesApi
     override fun initView() {
         mBinding.btnPrimary.setOnClickListener {
             startActivity(Intent(this, TestLifecycleActivity::class.java))

@@ -35,6 +35,16 @@ class UserAdapter(private val users: ArrayList<User>) :
     override fun getItemCount() = users.size
 
     fun addData(list: List<User>) {
+        val start = users.size
         users.addAll(list)
+        notifyItemRangeInserted(start, users.size)
+    }
+
+    fun refreshData(list: List<User>) {
+        users.run {
+            clear()
+            addAll(list)
+        }
+        notifyDataSetChanged()
     }
 }

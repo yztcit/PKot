@@ -3,6 +3,7 @@ package com.nttn.pkot.base
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.LayoutInflater
+import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -92,5 +93,14 @@ abstract class BaseVBActivity<VB : ViewDataBinding, VM : BaseViewModel> : AppCom
     override fun onDestroy() {
         super.onDestroy()
         GlobalHelper.watermark.removeObservers(this)
+    }
+
+    fun displayEmptyView(showEmptyView: Boolean) {
+        with(baseBinding.layoutEmpty) {
+            when (isInflated) {
+                true -> root.visibility = if (showEmptyView) View.VISIBLE else View.GONE
+                else -> viewStub?.visibility = if (showEmptyView) View.VISIBLE else View.GONE
+            }
+        }
     }
 }

@@ -3,5 +3,5 @@
 
     <string name="column_primary">基础语法</string>
     <string name="turn_to">跳转</string>
-    <string name="fetch_user">fetch users</string>
+    <string name="empty_data">暂无数据</string>
 </resources>
