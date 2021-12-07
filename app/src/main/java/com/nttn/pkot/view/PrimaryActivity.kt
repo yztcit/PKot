@@ -22,7 +22,7 @@ class PrimaryActivity : BaseVBActivity<PrimaryActivityBinding, BaseViewModel>() 
 
     override fun initView() {
         mBinding.btnPrimary.setOnClickListener {
-            startActivity(Intent(this, TestLifecycleActivity::class.java))
+            startActivity(Intent(this, MaterialDesignActivity::class.java))
         }
 
         printDivider("函数与返回值") {

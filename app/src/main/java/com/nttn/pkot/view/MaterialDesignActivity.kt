@@ -1,7 +1,7 @@
 package com.nttn.pkot.view
 
+import android.view.MenuItem
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.blankj.utilcode.util.ToastUtils
 import com.nttn.pkot.R
@@ -9,7 +9,7 @@ import com.nttn.pkot.TestLifecycleBinding
 import com.nttn.pkot.base.BaseVBActivity
 import com.nttn.pkot.data.RetrofitBuilder
 import com.nttn.pkot.data.api.ApiHelperImpl
-import com.nttn.pkot.view.adapter.UserAdapter
+import com.nttn.pkot.view.adapter.DataAdapter
 import com.nttn.pkot.view.intent.MainIntent
 import com.nttn.pkot.view.viewmodel.MainViewModel
 import com.nttn.pkot.view.viewmodel.ViewModelFactory
@@ -23,16 +23,20 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
-class TestLifecycleActivity : BaseVBActivity<TestLifecycleBinding, MainViewModel>() {
-    private val mAdapter = UserAdapter(arrayListOf())
+class MaterialDesignActivity : BaseVBActivity<TestLifecycleBinding, MainViewModel>() {
+    private val mAdapter = DataAdapter(arrayListOf())
 
     override fun getLayoutId() = R.layout.activity_test_lifecycle
 
+    override fun configProviderFactory() = ViewModelFactory(ApiHelperImpl(RetrofitBuilder.createService()))
+
     override fun initView() {
+        setSupportActionBar(mBinding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         mBinding.refreshLayout.run {
             setEnableLoadMoreWhenContentNotFull(true)
-            setRefreshHeader(MaterialHeader(this@TestLifecycleActivity))
-            setRefreshFooter(ClassicsFooter(this@TestLifecycleActivity))
+            setRefreshHeader(MaterialHeader(this@MaterialDesignActivity))
+            setRefreshFooter(ClassicsFooter(this@MaterialDesignActivity))
             setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {
                 override fun onRefresh(refreshLayout: RefreshLayout) {
                     lifecycleScope.launch { mViewModel.userIntent.send(MainIntent.Refresh) }
@@ -45,48 +49,46 @@ class TestLifecycleActivity : BaseVBActivity<TestLifecycleBinding, MainViewModel
         }
 
         mBinding.recyclerview.apply {
-            layoutManager = LinearLayoutManager(this@TestLifecycleActivity)
-            addItemDecoration(
-                DividerItemDecoration(
-                    context,
-                    (layoutManager as LinearLayoutManager).orientation
-                )
-            )
+            layoutManager = LinearLayoutManager(this@MaterialDesignActivity)
             adapter = mAdapter
         }
 
         lifecycleScope.launch {
             mViewModel.run {
-                userIntent.send(MainIntent.FetchUser)
                 state.collect {
                     when (it) {
                         is MainState.Idle -> {
-
+                            userIntent.send(MainIntent.FetchData)
                         }
                         is MainState.Loading -> {
                             //loading dialog
-                            mAdapter.refreshData(it.user)
-                            displayEmptyView(mAdapter.itemCount <= 0)
+                            mAdapter.refreshData(it.sampleData)
                         }
                         is MainState.Refreshing -> {
                             mBinding.refreshLayout.finishRefresh()
-                            mAdapter.refreshData(it.user)
-                            displayEmptyView(mAdapter.itemCount <= 0)
+                            mAdapter.refreshData(it.sampleData)
                         }
                         is MainState.LoadMore -> {
                             mBinding.refreshLayout.finishLoadMore()
-                            mAdapter.addData(it.user)
-                            displayEmptyView(mAdapter.itemCount <= 0)
+                            mAdapter.addData(it.sampleData)
                         }
                         is MainState.Error -> {
-                            displayEmptyView(mAdapter.itemCount <= 0)
                             ToastUtils.showShort(it.error)
                         }
                     }
+                    displayEmptyView(mAdapter.itemCount <= 0)
                 }
             }
         }
     }
 
-    override fun configProviderFactory() = ViewModelFactory(ApiHelperImpl(RetrofitBuilder.createService()))
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 }

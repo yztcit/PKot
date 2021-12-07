@@ -22,7 +22,7 @@ class MainViewModel(private val repository: MainRepository) : BaseViewModel() {
         viewModelScope.launch {
             userIntent.consumeAsFlow().collect {
                 when (it) {
-                    is MainIntent.FetchUser -> {
+                    is MainIntent.FetchData -> {
                         viewModelScope.launch {
                             mainState.value = try {
                                 MainState.Loading(repository.getUsers(pageNum, pageSize))

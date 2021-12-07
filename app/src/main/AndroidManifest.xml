@@ -22,8 +22,11 @@
         </activity>
 
         <activity android:name=".view.PrimaryActivity" />
-        <activity android:name=".view.TestLifecycleActivity"
+        <activity android:name=".view.MaterialDesignActivity"
             android:launchMode="singleTask"/>
+        <activity
+            android:name=".view.DetailActivity"
+            android:launchMode="singleTop" />
     </application>
 
 </manifest>

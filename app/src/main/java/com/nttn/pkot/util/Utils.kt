@@ -28,7 +28,7 @@ fun drawWatermarkText(text: String, screenWidth: Int, screenHeight: Int): Bitmap
     val rect = Rect()
     val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         //文本颜色
-        color = Color.parseColor("#55CCCCCC")
+        color = Color.parseColor("#50CCCCCC")
         //文本大小
         textSize = SizeUtils.dp2px(12f).toFloat()
         //获取更清晰的图像采样
@@ -42,8 +42,8 @@ fun drawWatermarkText(text: String, screenWidth: Int, screenHeight: Int): Bitmap
     val w = rect.width()
     val h = rect.height()
 
-    val spaceX = SizeUtils.dp2px(100f);//文本行间距
-    val spaceY = SizeUtils.dp2px(80f);//文本列间距
+    val spaceX = SizeUtils.dp2px(90f);//文本行间距
+    val spaceY = SizeUtils.dp2px(70f);//文本列间距
     //屏幕对角线
     val diagonal = sqrt(screenWidth.toDouble().pow(2.0) + screenHeight.toDouble().pow(2.0))
     //一行countX个，一列countY个

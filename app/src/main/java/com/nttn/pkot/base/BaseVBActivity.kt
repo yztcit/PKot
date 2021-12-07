@@ -1,10 +1,13 @@
 package com.nttn.pkot.base
 
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import androidx.annotation.LayoutRes
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -15,6 +18,7 @@ import com.blankj.utilcode.util.ToastUtils
 import com.nttn.pkot.BaseMarkBinding
 import com.nttn.pkot.GlobalHelper
 import com.nttn.pkot.R
+import com.xuexiang.xui.utils.StatusBarUtils
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.lang.reflect.ParameterizedType
 import kotlin.system.exitProcess
@@ -27,16 +31,16 @@ abstract class BaseVBActivity<VB : ViewDataBinding, VM : BaseViewModel> : AppCom
     private var exitTime: Long = 0
     private lateinit var baseBinding: BaseMarkBinding
 
+    open fun configTranslucent(): Boolean = false
+
     @LayoutRes
     abstract fun getLayoutId(): Int
 
     abstract fun initView()
 
-    protected open fun exitAfterTwice(): Boolean {
-        return false
-    }
-
     open fun configProviderFactory(): ViewModelProvider.Factory? = null
+
+    protected open fun exitAfterTwice(): Boolean = false
 
     private fun configViewModel() {
         // Actually ParameterizedType will give us actual type parameters
@@ -53,9 +57,12 @@ abstract class BaseVBActivity<VB : ViewDataBinding, VM : BaseViewModel> : AppCom
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        if (configTranslucent()) {
+            StatusBarUtils.translucent(this)
+        }
         baseBinding = DataBindingUtil.setContentView(this, R.layout.layout_base_watermark)
         configViewModel()
 

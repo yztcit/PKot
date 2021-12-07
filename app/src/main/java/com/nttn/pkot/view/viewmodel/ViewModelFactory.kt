@@ -7,8 +7,9 @@ import com.nttn.pkot.data.repository.MainRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.lang.IllegalArgumentException
 
+@ExperimentalCoroutinesApi
 class ViewModelFactory(private val apiHelper: ApiHelper):ViewModelProvider.Factory {
-    @ExperimentalCoroutinesApi
+
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
             return MainViewModel(MainRepository(apiHelper)) as T

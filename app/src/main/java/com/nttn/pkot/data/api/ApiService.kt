@@ -2,7 +2,7 @@ package com.nttn.pkot.data.api
 
 import com.nttn.pkot.base.BaseResponse
 import com.nttn.pkot.base.BaseApiService
-import com.nttn.pkot.data.model.User
+import com.nttn.pkot.data.model.SampleData
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -11,5 +11,5 @@ interface ApiService : BaseApiService {
     suspend fun getUsers(
         @Query("pageNum") pageNum: Int,
         @Query("pageSize") pageSize: Int
-    ): BaseResponse<List<User>>
+    ): BaseResponse<List<SampleData>>
 }
