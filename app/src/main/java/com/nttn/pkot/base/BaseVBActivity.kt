@@ -4,6 +4,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.annotation.RequiresApi
@@ -56,9 +57,9 @@ abstract class BaseVBActivity<VB : ViewDataBinding, VM : BaseViewModel> : AppCom
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        baseBinding = DataBindingUtil.setContentView(this, R.layout.layout_base_watermark)
         configViewModel()
 
+        baseBinding = DataBindingUtil.setContentView(this, R.layout.layout_base_watermark)
         baseBinding.contentLayout.let {
             mBinding = DataBindingUtil.inflate(LayoutInflater.from(this), getLayoutId(), it, true)
 
@@ -72,6 +73,16 @@ abstract class BaseVBActivity<VB : ViewDataBinding, VM : BaseViewModel> : AppCom
         if (mViewModel.showWatermark) {
             GlobalHelper.watermark.observe(this) { baseBinding.watermark.setImageBitmap(it) }
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {

@@ -1,6 +1,5 @@
 package com.nttn.pkot.view
 
-import android.view.MenuItem
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.blankj.utilcode.util.ToastUtils
@@ -33,6 +32,7 @@ class MaterialDesignActivity : BaseVBActivity<TestLifecycleBinding, MainViewMode
     override fun initView() {
         setSupportActionBar(mBinding.titleLayout.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         mBinding.refreshLayout.run {
             setEnableLoadMoreWhenContentNotFull(true)
             setRefreshHeader(MaterialHeader(this@MaterialDesignActivity))
@@ -75,21 +75,10 @@ class MaterialDesignActivity : BaseVBActivity<TestLifecycleBinding, MainViewMode
                         is MainState.Error -> {
                             ToastUtils.showShort(it.error)
                         }
-                        else -> { }
                     }
                     displayEmptyView(mAdapter.itemCount <= 0)
                 }
             }
         }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                finish()
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 }
