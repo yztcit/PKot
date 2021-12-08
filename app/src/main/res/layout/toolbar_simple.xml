@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data class=".SimpleToolbarBinding" >
+        <variable
+            name="title"
+            type="String" />
+    </data>
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            app:title='@{title, default = "title"}'
+            android:theme="@style/DesignToolbarTheme"
+            android:background="?attr/colorPrimaryVariant"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_scrollFlags="scroll|enterAlwaysCollapsed|snap"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+</layout>

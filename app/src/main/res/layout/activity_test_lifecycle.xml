@@ -9,20 +9,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/toolbar"
-                app:title="@string/md_sample"
-                android:theme="@style/DesignToolbarTheme"
-                android:background="?attr/colorPrimaryVariant"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_scrollFlags="scroll|enterAlwaysCollapsed|snap"/>
-
-        </com.google.android.material.appbar.AppBarLayout>
+        <include
+            android:id="@+id/title_layout"
+            app:title="@{@string/md_sample}"
+            layout="@layout/toolbar_simple" />
 
         <com.scwang.smart.refresh.layout.SmartRefreshLayout
             android:id="@+id/refreshLayout"

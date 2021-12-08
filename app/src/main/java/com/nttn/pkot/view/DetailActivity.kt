@@ -25,11 +25,11 @@ class DetailActivity : BaseVBActivity<DetailActBinding, BaseViewModel>() {
 
     override fun initView() {
         val sampleData: SampleData? = intent.getParcelableExtra("data")
-        setSupportActionBar(mBinding.toolbar)
+        setSupportActionBar(mBinding.collapseToolbar.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         sampleData?.let {
             mBinding.collapseToolbar.title = it.name
-            Glide.with(this).load(it.avatar).into(mBinding.image)
+            Glide.with(this).load(it.avatar).into(mBinding.collapseToolbar.image)
             mBinding.content.text = it.content?.repeat(10)
         }
     }

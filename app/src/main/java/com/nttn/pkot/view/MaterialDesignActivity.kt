@@ -31,7 +31,7 @@ class MaterialDesignActivity : BaseVBActivity<TestLifecycleBinding, MainViewMode
     override fun configProviderFactory() = ViewModelFactory(ApiHelperImpl(RetrofitBuilder.createService()))
 
     override fun initView() {
-        setSupportActionBar(mBinding.toolbar)
+        setSupportActionBar(mBinding.titleLayout.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         mBinding.refreshLayout.run {
             setEnableLoadMoreWhenContentNotFull(true)
@@ -75,6 +75,7 @@ class MaterialDesignActivity : BaseVBActivity<TestLifecycleBinding, MainViewMode
                         is MainState.Error -> {
                             ToastUtils.showShort(it.error)
                         }
+                        else -> { }
                     }
                     displayEmptyView(mAdapter.itemCount <= 0)
                 }
