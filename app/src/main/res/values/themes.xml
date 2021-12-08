@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.PKot" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/transparent_light</item>
+        <item name="colorPrimary">@color/status_light</item>
+        <item name="colorPrimaryVariant">@color/status_light</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -15,5 +15,13 @@
         <!-- Customize your theme here. -->
         <item name="background">@color/color_EFEFF4</item>
         <item name="android:textColorPrimary">@color/black</item>
+    </style>
+
+    <style name="DesignTranslucentActivity" parent="Theme.PKot">
+        <item name="android:statusBarColor" tools:targetApi="l">@android:color/transparent</item>
+    </style>
+    <style name="DesignToolbarTheme" parent="Theme.PKot">
+        <item name="colorControlNormal">@color/white</item>
+        <item name="android:textColorPrimary">@color/white</item>
     </style>
 </resources>

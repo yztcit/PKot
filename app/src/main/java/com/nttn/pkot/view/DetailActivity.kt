@@ -21,8 +21,6 @@ class DetailActivity : BaseVBActivity<DetailActBinding, BaseViewModel>() {
         }
     }
 
-    override fun configTranslucent() = true
-
     override fun getLayoutId() = R.layout.activity_detail
 
     override fun initView() {
@@ -32,7 +30,7 @@ class DetailActivity : BaseVBActivity<DetailActBinding, BaseViewModel>() {
         sampleData?.let {
             mBinding.collapseToolbar.title = it.name
             Glide.with(this).load(it.avatar).into(mBinding.image)
-            mBinding.content.text = it.content
+            mBinding.content.text = it.content?.repeat(10)
         }
     }
 

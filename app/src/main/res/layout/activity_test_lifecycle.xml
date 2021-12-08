@@ -16,6 +16,7 @@
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 app:title="@string/md_sample"
+                android:theme="@style/DesignToolbarTheme"
                 android:background="?attr/colorPrimaryVariant"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
