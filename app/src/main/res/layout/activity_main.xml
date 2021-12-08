@@ -28,7 +28,7 @@
                     android:id="@+id/btn_primary"
                     android:text="@string/column_primary"
                     android:textSize="16sp"
-                    style="@style/DesignToolbarTheme"
+                    android:textColor="@color/white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </androidx.appcompat.widget.LinearLayoutCompat>
