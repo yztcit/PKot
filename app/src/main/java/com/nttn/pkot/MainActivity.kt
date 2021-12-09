@@ -12,7 +12,7 @@ class MainActivity : BaseVBActivity<MainActivityBinding, BaseViewModel>() {
 
     override fun initView() {
         setSupportActionBar(mBinding.toolbarLayout.toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        //supportActionBar?.setDisplayHomeAsUpEnabled(true)
         mBinding.btnPrimary.setOnClickListener { PrimaryActivity.actionStart(this) }
     }
 

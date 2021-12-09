@@ -70,7 +70,7 @@ class MaterialDesignActivity : BaseVBActivity<TestLifecycleBinding, MainViewMode
                         }
                         is MainState.LoadMore -> {
                             mBinding.refreshLayout.finishLoadMore()
-                            mAdapter.addData(it.sampleData)
+                            mAdapter.appendData(it.sampleData)
                         }
                         is MainState.Error -> {
                             ToastUtils.showShort(it.error)
