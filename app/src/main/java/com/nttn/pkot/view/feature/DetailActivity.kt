@@ -1,4 +1,4 @@
-package com.nttn.pkot.view
+package com.nttn.pkot.view.feature
 
 import android.content.Context
 import android.content.Intent

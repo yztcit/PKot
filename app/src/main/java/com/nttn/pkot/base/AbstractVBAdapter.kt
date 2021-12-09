@@ -1,6 +1,7 @@
 package com.nttn.pkot.base
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
@@ -9,14 +10,18 @@ import androidx.recyclerview.widget.RecyclerView
 
 abstract class AbstractVBAdapter<T, VB : ViewDataBinding>(
     private val data: ArrayList<T>? = null,
-    private val action: VB.(position: Int) -> Unit? = { }
+    private val listener: (view: View, position: Int) -> Unit = { _, _ -> },
+    private val action: (VB, position: Int) -> Unit = { _, _ -> }
 ) : RecyclerView.Adapter<AbstractVBAdapter<T, VB>.Holder>() {
 
     inner class Holder(private var binding: VB) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(position: Int) {
-            binding.action(position)
+            action(binding, position)
+            itemView.setOnClickListener {
+                listener(it, position)
+            }
         }
     }
 

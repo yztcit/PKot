@@ -5,20 +5,19 @@ import com.nttn.pkot.R
 import com.nttn.pkot.UserItemBinding
 import com.nttn.pkot.base.AbstractVBAdapter
 import com.nttn.pkot.data.model.SampleData
-import com.nttn.pkot.view.DetailActivity
+import com.nttn.pkot.view.feature.DetailActivity
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
 class DataAdapter(sampleData: ArrayList<SampleData>) :
-    AbstractVBAdapter<SampleData, UserItemBinding>(sampleData, { position ->
+    AbstractVBAdapter<SampleData, UserItemBinding>(sampleData, listener = { view, position ->
+        DetailActivity.seeDetail(view.context, sampleData[position])
+    }, action = { binding, position ->
         val data = sampleData[position]
-        let {
-            it.name.text = data.name
-            it.email.text = data.email
-            Glide.with(root.context).load(data.avatar).into(it.image)
-            it.root.setOnClickListener {
-                DetailActivity.seeDetail(root.context, data)
-            }
+        binding.run {
+            name.text = data.name
+            email.text = data.email
+            Glide.with(root.context).load(data.avatar).into(image)
         }
     }) {
 

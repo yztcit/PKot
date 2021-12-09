@@ -1,4 +1,4 @@
-package com.nttn.pkot.view
+package com.nttn.pkot.view.feature
 
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager

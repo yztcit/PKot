@@ -78,7 +78,7 @@ abstract class BaseVBActivity<VB : ViewDataBinding, VM : BaseViewModel> : AppCom
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                finish()
+                if (!exitAfterTwice()) finish() else dealBackPressedTwice()
                 return true
             }
         }
@@ -88,15 +88,7 @@ abstract class BaseVBActivity<VB : ViewDataBinding, VM : BaseViewModel> : AppCom
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         if (!exitAfterTwice()) return super.onKeyDown(keyCode, event)
         if (KeyEvent.ACTION_DOWN == event.action && KeyEvent.KEYCODE_BACK == keyCode) {
-            if (System.currentTimeMillis() - exitTime > 2000) {
-                ToastUtils.showShort("再按一次退出程序")
-                exitTime = System.currentTimeMillis()
-            } else {
-                GlobalHelper.recycleWatermark()
-                finish()
-                exitProcess(0)
-            }
-            return true
+            return dealBackPressedTwice()
         }
         return super.onKeyDown(keyCode, event)
     }
@@ -104,6 +96,18 @@ abstract class BaseVBActivity<VB : ViewDataBinding, VM : BaseViewModel> : AppCom
     override fun onDestroy() {
         super.onDestroy()
         GlobalHelper.watermark.removeObservers(this)
+    }
+
+    protected open fun dealBackPressedTwice(): Boolean {
+        if (System.currentTimeMillis() - exitTime > 2000) {
+            ToastUtils.showShort("再按一次退出程序")
+            exitTime = System.currentTimeMillis()
+        } else {
+            GlobalHelper.recycleWatermark()
+            finish()
+            exitProcess(0)
+        }
+        return true
     }
 
     fun displayEmptyView(showEmptyView: Boolean) {

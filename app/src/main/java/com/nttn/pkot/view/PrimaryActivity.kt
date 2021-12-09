@@ -6,6 +6,7 @@ import com.nttn.pkot.PrimaryActivityBinding
 import com.nttn.pkot.R
 import com.nttn.pkot.base.BaseVBActivity
 import com.nttn.pkot.base.BaseViewModel
+import com.nttn.pkot.view.feature.MaterialDesignActivity
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlin.random.Random
 

@@ -2,8 +2,15 @@
     <string name="app_name">皮卡丘</string>
 
     <string name="empty_data">暂无数据</string>
+
     <string name="title_home">主页</string>
+    <string name="drawer_open">打开抽屉</string>
+    <string name="drawer_close">关闭抽屉</string>
+
     <string name="column_primary">基础语法</string>
+    <string name="expand_list">可折叠多选列表</string>
+    <string name="material_design_style">MD风格</string>
+
     <string name="turn_to">跳转</string>
-    <string name="md_sample">MD风格</string>
+    <string name="md_sample">@string/material_design_style</string>
 </resources>
