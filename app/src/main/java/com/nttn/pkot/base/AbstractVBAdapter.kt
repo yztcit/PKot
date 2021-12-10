@@ -11,14 +11,14 @@ import androidx.recyclerview.widget.RecyclerView
 abstract class AbstractVBAdapter<T, VB : ViewDataBinding>(
     private val data: ArrayList<T>? = null,
     private val listener: (view: View, position: Int) -> Unit = { _, _ -> },
-    private val action: (VB, position: Int) -> Unit = { _, _ -> }
+    private val onBind: AbstractVBAdapter<T, VB>.(VB, position: Int) -> Unit = { _, _ -> }
 ) : RecyclerView.Adapter<AbstractVBAdapter<T, VB>.Holder>() {
 
     inner class Holder(private var binding: VB) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(position: Int) {
-            action(binding, position)
+            onBind(binding, position)
             itemView.setOnClickListener {
                 listener(it, position)
             }
@@ -45,6 +45,15 @@ abstract class AbstractVBAdapter<T, VB : ViewDataBinding>(
 
     override fun getItemCount(): Int {
         return if (data.isNullOrEmpty()) 0 else data.size
+    }
+
+    fun getDataList(): ArrayList<T>? = data
+
+    fun clearAll() {
+        data?.apply {
+            clear()
+            notifyDataSetChanged()
+        }
     }
 
     fun appendData(list: List<T>) {

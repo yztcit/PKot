@@ -12,7 +12,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 class DataAdapter(sampleData: ArrayList<SampleData>) :
     AbstractVBAdapter<SampleData, UserItemBinding>(sampleData, listener = { view, position ->
         DetailActivity.seeDetail(view.context, sampleData[position])
-    }, action = { binding, position ->
+    }, onBind = { binding, position ->
         val data = sampleData[position]
         binding.run {
             name.text = data.name

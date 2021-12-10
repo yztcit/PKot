@@ -10,14 +10,22 @@ import com.nttn.pkot.databinding.MainItemBinding
 class MainAdapter(
     list: ArrayList<MainData>,
     private var listener: (view: View, data: MainData) -> Unit = { view, data ->
-        view.context.startActivity(Intent(view.context, Class.forName(data.navigation)))
+        if (data.navigation.isNotEmpty()) {
+            view.context.startActivity(Intent(view.context, Class.forName(data.navigation)))
+        }
     }
 ) :
     AbstractVBAdapter<MainData, MainItemBinding>(list, listener = { itemView, position ->
         listener(itemView, list[position])
-    }, action = { binding, position ->
+    }, onBind = { binding, position ->
         val mainData = list[position]
-        binding.description.text = mainData.description
+        binding.tvDescription.text = mainData.description
+        binding.tvName.text = mainData.roomName
+        binding.tvName.setOnClickListener {
+            if (mainData.navigation.isNotEmpty()) {
+                it.context.startActivity(Intent(it.context, Class.forName(mainData.navigation)))
+            }
+        }
     }) {
 
     override fun getLayoutId() = R.layout.item_main_layout

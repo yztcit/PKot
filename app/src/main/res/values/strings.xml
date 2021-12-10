@@ -7,7 +7,18 @@
     <string name="drawer_open">打开抽屉</string>
     <string name="drawer_close">关闭抽屉</string>
 
+    <string name="expand">展开</string>
+    <string name="collapse">收起</string>
+    <string name="reset">重置</string>
+    <string name="confirm">确认</string>
+
     <string name="column_primary">基础语法</string>
+    <string name="column_ui">应用界面</string>
+    <string name="column_network">网络访问</string>
+    <string name="column_storage">数据存储</string>
+    <string name="column_third_lib">三方开源</string>
+    <string name="column_optimization">应用优化</string>
+    <!--  column_ui  -->
     <string name="expand_list">可折叠多选列表</string>
     <string name="material_design_style">MD风格</string>
 
