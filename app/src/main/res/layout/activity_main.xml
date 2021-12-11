@@ -20,13 +20,32 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerview"
-                tools:listitem="@layout/item_main_layout"
-                app:spanCount="2"
-                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview"
+                    tools:listitem="@layout/item_main_layout"
+                    app:spanCount="2"
+                    app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <!--app:menu="@menu/menu_bottom_navi"-->
+                <com.google.android.material.bottomnavigation.BottomNavigationView
+                    android:id="@+id/navigationView"
+                    android:layout_width="match_parent"
+                    android:layout_height="?android:actionBarSize"
+                    android:background="?attr/colorPrimaryVariant"
+                    app:labelVisibilityMode="labeled"
+                    app:menu="@menu/menu_bottom_navi"
+                    app:itemTextColor="@drawable/selector_bottom_navi_color"
+                    app:itemIconTint="@drawable/selector_bottom_navi_color"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
             <include
                 android:id="@+id/layout_expand"

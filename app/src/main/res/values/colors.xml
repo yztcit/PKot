@@ -12,7 +12,9 @@
     <color name="status_light">#FF03A9F4</color>
     <color name="status_dark">#FF555555</color>
     <color name="color_F5F5F5">#F5F5F5</color>
+    <color name="color_B">#BBBBBB</color>
     <color name="color_C">#CCCCCC</color>
+    <color name="color_CD">#CDCDCD</color>
     <color name="color_D7">#D7D7D7</color>
     <color name="color_EFEFF4">#EFEFF4</color>
     <color name="color_F7F8FC">#F7F8FC</color>
