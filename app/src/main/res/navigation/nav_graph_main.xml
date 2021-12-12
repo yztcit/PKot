@@ -1,6 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/fragment_home"
     android:id="@+id/nav_main_frag">
 
+    <fragment
+        android:id="@+id/fragment_home"
+        android:name="com.nttn.pkot.view.feature.HomeFragment"
+        android:label="@string/navi_home"
+        tools:layout="@layout/fragment_home" >
+
+        <action
+            android:id="@+id/action_test_navigate"
+            app:destination="@id/fragment_category"
+            app:popUpTo="@id/fragment_category"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim">
+
+            <argument
+                android:name="title"
+                android:defaultValue="nullable"
+                app:argType="string" />
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_category"
+        android:name="com.nttn.pkot.view.feature.CategoryFragment"
+        android:label="@string/navi_category"
+        tools:layout="@layout/fragment_category" />
+
+    <fragment
+        android:id="@+id/fragment_find"
+        android:name="com.nttn.pkot.view.feature.FindFragment"
+        android:label="@string/navi_find"
+        tools:layout="@layout/fragment_find" />
+
+    <fragment
+        android:id="@+id/fragment_msg"
+        android:name="com.nttn.pkot.view.feature.MsgFragment"
+        android:label="@string/navi_msg"
+        tools:layout="@layout/fragment_msg" />
+
+    <fragment
+        android:id="@+id/fragment_mine"
+        android:name="com.nttn.pkot.view.feature.MineFragment"
+        android:label="@string/navi_mine"
+        tools:layout="@layout/fragment_mine" />
 </navigation>
