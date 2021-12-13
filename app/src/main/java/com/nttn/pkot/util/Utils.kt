@@ -1,12 +1,21 @@
 package com.nttn.pkot.util
 
+import android.content.Context
 import android.graphics.*
+import android.os.Handler
+import android.os.Message
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.blankj.utilcode.util.SizeUtils
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 import kotlin.math.pow
 import kotlin.math.roundToInt
 import kotlin.math.sqrt
@@ -20,6 +29,53 @@ inline fun <reified T: ViewModel> provideViewModel(
     context: Fragment,
     factory: ViewModelProvider.Factory? = null
 ): T = ViewModelProviders.of(context, factory).get(T::class.java)
+
+
+
+suspend fun Context.alert(title: String, message: String): Boolean =
+    suspendCancellableCoroutine { continuation ->
+        AlertDialog.Builder(this)
+            .setNeutralButton("No") { dialog, _ ->
+                dialog.dismiss()
+                continuation.resume(false)
+            }.setNegativeButton("Yes") { dialog, _ ->
+                dialog.dismiss()
+                continuation.resume(true)
+            }.setTitle(title).setMessage(message)
+            .show()
+    }
+
+
+
+suspend fun <T> Handler.run(block: () -> T) = suspendCoroutine<T> { continuation ->
+    post {
+        try {
+            continuation.resume(block())
+        } catch (e: Exception) {
+            continuation.resumeWithException(e)
+        }
+    }
+}
+
+suspend fun <T> Handler.runDelay(delay: Long, block: () -> T) = suspendCancellableCoroutine<T> { continuation ->
+    val message = Message.obtain(this) {
+        try {
+            continuation.resume(block())
+        } catch (e: Exception) {
+            continuation.resumeWithException(e)
+        }
+    }.also {
+        it.obj = continuation
+    }
+
+    continuation.invokeOnCancellation {
+        removeCallbacksAndMessages(continuation)
+    }
+
+    sendMessageDelayed(message, delay)
+}
+
+
 
 /**
  * 绘制水印图

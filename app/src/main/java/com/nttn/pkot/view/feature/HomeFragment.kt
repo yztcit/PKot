@@ -3,6 +3,7 @@ package com.nttn.pkot.view.feature
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -11,10 +12,12 @@ import com.nttn.pkot.HomeFragBinding
 import com.nttn.pkot.R
 import com.nttn.pkot.base.BaseVBFragment
 import com.nttn.pkot.data.model.MainData
+import com.nttn.pkot.util.alert
 import com.nttn.pkot.view.PrimaryActivity
 import com.nttn.pkot.view.adapter.MainAdapter
 import com.nttn.pkot.view.widget.ExpandListAdapter
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
 class HomeFragment: BaseVBFragment<HomeFragBinding>() {
@@ -67,9 +70,17 @@ class HomeFragment: BaseVBFragment<HomeFragBinding>() {
         mBinding.layoutExpand.btnReset.setOnClickListener {
             ToastUtils.showShort("clicked reset")
             mBinding.drawerLayout.closeDrawer(GravityCompat.START)
-            //测试navigation 跳转传参
-            Navigation.findNavController(it)
-                .navigate(NavFragmentDirections.actionToCategoryFragment(getString(R.string.navi_category) + "action"))
+
+            lifecycleScope.launch {
+                if (context?.alert("Tips", "Do you confirm?") == true) {
+                    //测试navigation 跳转传参
+                    Navigation.findNavController(it).navigate(
+                        NavFragmentDirections.actionToCategoryFragment(
+                            getString(R.string.navi_category) + "action"
+                        )
+                    )
+                }
+            }
         }
 
         mBinding.layoutExpand.recyclerView.run {
@@ -98,7 +109,7 @@ class HomeFragment: BaseVBFragment<HomeFragBinding>() {
     }
 
     private fun fakeHomeItemData(): ArrayList<MainData> = ArrayList<MainData>().apply {
-        add(MainData(1, 1, getString(R.string.column_primary), getString(R.string.column_primary), "Kotlin基础语法——变量，方法，循环，面向对象，标准函数、高价函数，协程等", PrimaryActivity::class.java.name, false, null))
+        add(MainData(1, 1, getString(R.string.column_primary), getString(R.string.column_primary), "Kotlin基础语法——变量，方法，循环，面向对象，标准函数、高阶函数，协程等", PrimaryActivity::class.java.name, false, null))
         add(MainData(2, 1, getString(R.string.column_ui), getString(R.string.expand_list), "基于RecyclerView实现的可折叠、展开，同时多级级联的多选列表", "", false, null))
         add(MainData(2, 2, getString(R.string.column_ui), getString(R.string.material_design_style), "Material Design 风格的界面——列表页Toolbar随着列表滑动收起或展开，详情页CollapseToolbar图文", MaterialDesignActivity::class.java.name, false, null))
     }
