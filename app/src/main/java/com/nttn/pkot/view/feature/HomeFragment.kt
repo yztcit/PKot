@@ -4,7 +4,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.blankj.utilcode.util.ToastUtils
@@ -74,7 +74,7 @@ class HomeFragment: BaseVBFragment<HomeFragBinding>() {
             lifecycleScope.launch {
                 if (context?.alert("Tips", "Do you confirm?") == true) {
                     //测试navigation 跳转传参
-                    Navigation.findNavController(it).navigate(
+                    findNavController(this@HomeFragment).navigate(
                         NavFragmentDirections.actionToCategoryFragment(
                             getString(R.string.navi_category) + "action"
                         )

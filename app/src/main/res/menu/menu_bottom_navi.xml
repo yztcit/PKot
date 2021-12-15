@@ -9,14 +9,16 @@
         android:id="@+id/fragment_category"
         android:icon="@mipmap/ic_category"
         android:title="@string/navi_category" />
+
     <item
-        android:id="@+id/fragment_find"
-        android:icon="@mipmap/ic_find"
-        android:title="@string/navi_find" />
+        android:id="@+id/fragment_note"
+        android:icon="@mipmap/ic_add"
+        android:title="@string/navi_note" />
+
     <item
-        android:id="@+id/fragment_msg"
-        android:icon="@mipmap/ic_msg"
-        android:title="@string/navi_msg" />
+        android:id="@+id/fragment_store"
+        android:icon="@mipmap/ic_store"
+        android:title="@string/navi_store" />
     <item
         android:id="@+id/fragment_mine"
         android:icon="@mipmap/ic_mine"

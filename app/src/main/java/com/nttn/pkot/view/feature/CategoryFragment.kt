@@ -10,6 +10,6 @@ class CategoryFragment: BaseVBFragment<CategoryFragBinding>() {
 
     override fun initView() {
         val title = arguments?.getString("title", "get null title")
-        mBinding.textView.text = title
+        mBinding.textView.text = title ?: getString(R.string.navi_category)
     }
 }
