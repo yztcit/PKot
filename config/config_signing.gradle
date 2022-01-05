@@ -1,0 +1,51 @@
+void configSigning(Project project) {
+    project.android {
+        signingConfigs {
+            global {
+                storeFile file(KEY_PATH)
+                storePassword KEY_PASS
+                keyAlias ALIAS_NAME
+                keyPassword ALIAS_PASS
+            }
+        }
+
+        buildTypes {
+            release {
+                minifyEnabled false
+                proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+                multiDexEnabled true
+                signingConfig signingConfigs.global
+            }
+            debug {
+                minifyEnabled false
+                proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+                multiDexEnabled true
+                //signingConfig signingConfigs.global
+            }
+        }
+
+        //android打包提示check release builds false
+        lintOptions {
+            checkReleaseBuilds false
+            abortOnError false
+        }
+    }
+}
+
+void modifyApkName(Project project) {
+    project.android.applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def formattedDate = new Date().format('yyyyMMddHHmm')
+            def fileName = project.getName() + "_v${variant.versionName}_${formattedDate}_${variant.buildType.name}.apk"
+            def outFile = output.outputFile
+            if (outFile != null && outFile.name.endsWith('.apk')) {
+                outputFileName = fileName
+            }
+        }
+    }
+}
+
+ext {
+    configSigning = this.&configSigning
+    modifyApkName = this.&modifyApkName
+}

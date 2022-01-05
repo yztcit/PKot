@@ -10,9 +10,9 @@
     <string name="navi_mine">我的</string>
 
     <string name="title_home">@string/navi_home</string>
+    <string name="title_note">@string/navi_note</string>
     <string name="drawer_open">打开抽屉</string>
     <string name="drawer_close">关闭抽屉</string>
-
     <string name="expand">展开</string>
     <string name="collapse">收起</string>
     <string name="reset">重置</string>

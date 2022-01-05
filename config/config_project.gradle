@@ -1,0 +1,23 @@
+
+rootProject.subprojects { Project project ->
+    String proName = project.getName()
+    println(">>> recursive module: ${proName}")
+
+    //配置 module-android
+    apply from: "../config/config_primary.gradle"
+
+    project.afterEvaluate {
+        //配置 module-android
+        applyAndroidExtensions(project)
+
+        if (project.plugins.hasPlugin('com.android.application')) {
+            println(">>> config module ${proName}")
+
+            //打包配置
+            apply from: "./config/config_signing.gradle"
+
+            configSigning(project)
+            modifyApkName(project)
+        }
+    }
+}

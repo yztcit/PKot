@@ -36,6 +36,12 @@
         tools:layout="@layout/fragment_category" />
 
     <fragment
+        android:id="@+id/fragment_note"
+        android:name="com.nttn.pkot.view.feature.NoteFragment"
+        android:label="@string/navi_note"
+        tools:layout="@layout/fragment_note" />
+
+    <fragment
         android:id="@+id/fragment_store"
         android:name="com.nttn.pkot.view.feature.FindFragment"
         android:label="@string/navi_store"

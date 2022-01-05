@@ -19,6 +19,7 @@
             android:background="?attr/colorPrimaryVariant"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            app:popupTheme="@style/ToolbarMenuTheme"
             app:layout_scrollFlags="scroll|enterAlwaysCollapsed|snap"/>
 
     </com.google.android.material.appbar.AppBarLayout>
