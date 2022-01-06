@@ -3,9 +3,11 @@ package com.nttn.pkot.view.feature
 import android.view.Menu
 import android.view.MenuInflater
 import androidx.appcompat.app.AppCompatActivity
+import com.nttn.pkot.CuzApplication
 import com.nttn.pkot.NoteFragmentBinding
 import com.nttn.pkot.R
 import com.nttn.pkot.base.BaseVBFragment
+import com.nttn.pkot.data.room.Note
 
 class NoteFragment: BaseVBFragment<NoteFragmentBinding>() {
 
@@ -18,6 +20,15 @@ class NoteFragment: BaseVBFragment<NoteFragmentBinding>() {
                 //setDisplayHomeAsUpEnabled(true)
                 setHasOptionsMenu(true)
             }
+        }
+
+        val note1 = Note()
+
+        mBinding.btnAdd.setOnClickListener {
+            CuzApplication.sDataBase.noteDao().insertNote(note1)
+        }
+        mBinding.btnDel.setOnClickListener {
+            CuzApplication.sDataBase.noteDao().deleteNote(note1)
         }
     }
 
