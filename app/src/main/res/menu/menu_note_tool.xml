@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/search"
+        app:showAsAction="always"
+        android:icon="@mipmap/ic_search"
+        android:title="@string/note_menu_search" />
+
+    <item
+        android:id="@+id/layout"
+        app:showAsAction="never"
+        android:title="@string/note_menu_layout" />
+
+    <item
+        android:id="@+id/del_multi"
+        app:showAsAction="never"
+        android:title="@string/note_menu_del_multi" />
+
+    <item
+        android:id="@+id/sort_by"
+        app:showAsAction="never"
+        android:title="@string/note_menu_sort_by" />
+</menu>

@@ -76,13 +76,13 @@ abstract class BaseVBActivity<VB : ViewDataBinding, VM : BaseViewModel> : AppCom
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+        return when (item.itemId) {
             android.R.id.home -> {
                 if (!exitAfterTwice()) finish() else dealBackPressedTwice()
-                return true
+                true
             }
+            else -> super.onOptionsItemSelected(item)
         }
-        return super.onOptionsItemSelected(item)
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {

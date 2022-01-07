@@ -3,21 +3,22 @@ package com.nttn.pkot
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
-import androidx.room.Room
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.PathUtils
 import com.nttn.pkot.data.room.PkotDatabase
+import com.nttn.pkot.BuildConfig
 import java.io.File
-import kotlin.concurrent.thread
 
-class CuzApplication: Application() {
+class CuzApplication : Application() {
+
     companion object {
-        lateinit var sDataBase: PkotDatabase
+        lateinit var sApplication: CuzApplication
+        val sDataBase: PkotDatabase by lazy { PkotDatabase.aDatabase }
     }
 
     override fun onCreate() {
         super.onCreate()
-        initDataBase()
+        sApplication = this
         registerActivityLifecycleCallbacks(CuzLifecycle())
         initLog()
         GlobalHelper.generateWatermark(getString(R.string.app_name))
@@ -33,13 +34,7 @@ class CuzApplication: Application() {
         LogUtils.i(LogUtils.getConfig().dir)
     }
 
-    private fun initDataBase() {
-        thread {
-            sDataBase = Room.databaseBuilder(applicationContext, PkotDatabase::class.java, "pkot_data").build()
-        }
-    }
-
-    inner class CuzLifecycle: ActivityLifecycleCallbacks {
+    inner class CuzLifecycle : ActivityLifecycleCallbacks {
         override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
             LogUtils.d(activity)
         }

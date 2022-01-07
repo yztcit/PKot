@@ -34,7 +34,7 @@ class MaterialDesignActivity : BaseVBActivity<TestLifecycleBinding, MainViewMode
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         mBinding.refreshLayout.run {
-            setEnableLoadMoreWhenContentNotFull(true)
+            setEnableLoadMoreWhenContentNotFull(false)
             setRefreshHeader(MaterialHeader(this@MaterialDesignActivity))
             setRefreshFooter(ClassicsFooter(this@MaterialDesignActivity))
             setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {

@@ -3,7 +3,7 @@ package com.nttn.pkot.data.room
 import androidx.room.TypeConverter
 import java.util.*
 
-object DataConvert {
+open class DateConvert {
     @TypeConverter
     fun timestampToDate(timestamp: Long?): Date? {
         return timestamp?.run {

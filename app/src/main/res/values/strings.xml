@@ -11,6 +11,7 @@
 
     <string name="title_home">@string/navi_home</string>
     <string name="title_note">@string/navi_note</string>
+
     <string name="drawer_open">打开抽屉</string>
     <string name="drawer_close">关闭抽屉</string>
     <string name="expand">展开</string>
@@ -30,4 +31,9 @@
 
     <string name="turn_to">跳转</string>
     <string name="md_sample">@string/material_design_style</string>
+
+    <string name="note_menu_search">搜索</string>
+    <string name="note_menu_layout">切换视图</string>
+    <string name="note_menu_del_multi">批量删除</string>
+    <string name="note_menu_sort_by">排序方式</string>
 </resources>
