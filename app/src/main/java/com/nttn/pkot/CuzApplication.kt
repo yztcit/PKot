@@ -3,17 +3,27 @@ package com.nttn.pkot
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
+import com.blankj.utilcode.util.AppUtils
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.PathUtils
 import com.nttn.pkot.data.room.PkotDatabase
-import com.nttn.pkot.BuildConfig
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import java.io.File
 
 class CuzApplication : Application() {
 
     companion object {
         lateinit var sApplication: CuzApplication
-        val sDataBase: PkotDatabase by lazy { PkotDatabase.aDatabase }
+        private lateinit var sDataBase: PkotDatabase
+        suspend fun obtainDB(): PkotDatabase {
+            return if (this::sDataBase.isInitialized) {
+                sDataBase
+            } else GlobalScope.async {
+                sDataBase = PkotDatabase.aDatabase
+                return@async sDataBase
+            }.await()
+        }
     }
 
     override fun onCreate() {
@@ -27,8 +37,8 @@ class CuzApplication : Application() {
     private fun initLog() {
         LogUtils.getConfig()
             .setGlobalTag("PKotLog")
-            .setLogSwitch(BuildConfig.DEBUG)
-            .setLog2FileSwitch(BuildConfig.DEBUG)
+            .setLogSwitch(AppUtils.isAppDebug())
+            .setLog2FileSwitch(AppUtils.isAppDebug())
             .setBorderSwitch(true)
             .setDir(File(PathUtils.getCachePathExternalFirst(), "log"))
         LogUtils.i(LogUtils.getConfig().dir)

@@ -4,17 +4,23 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.blankj.utilcode.util.ToastUtils
+import com.nttn.pkot.CuzApplication
 import com.nttn.pkot.NoteFragmentBinding
 import com.nttn.pkot.R
 import com.nttn.pkot.base.BaseVBFragment
+import com.nttn.pkot.data.room.Note
 import com.nttn.pkot.view.adapter.DataAdapter
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.MaterialHeader
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.launch
+import java.util.*
 
 @ExperimentalCoroutinesApi
 class NoteFragment : BaseVBFragment<NoteFragmentBinding>() {
@@ -51,7 +57,13 @@ class NoteFragment : BaseVBFragment<NoteFragmentBinding>() {
             adapter = mAdapter
         }
 
-        mBinding.floating.setOnClickListener { ToastUtils.showShort("todo: 跳转新建笔记页面") }
+        mBinding.floating.setOnClickListener {
+            ToastUtils.showShort("todo: 跳转新建笔记页面")
+            lifecycleScope.launch(Dispatchers.IO) {
+                val note = Note(1, "test", Date(), "test room db")
+                CuzApplication.obtainDB().noteDao().insertNote(note)
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

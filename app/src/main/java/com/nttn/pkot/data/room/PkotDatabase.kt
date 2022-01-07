@@ -17,7 +17,7 @@ abstract class PkotDatabase : RoomDatabase() {
             //如果databaseBuilder改为inMemoryDatabaseBuilder则创建一个内存数据库（进程销毁后，数据丢失）
             Room.databaseBuilder(CuzApplication.sApplication, PkotDatabase::class.java, "pkot_data")
                 //是否允许在主线程进行查询
-                .allowMainThreadQueries()
+                //.allowMainThreadQueries()
                 //数据库创建和打开后的回调，可以重写其中的方法
                 .addCallback(object : Callback() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
