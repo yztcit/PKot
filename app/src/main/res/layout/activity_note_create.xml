@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data class=".NoteCreateBinding" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="?background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/toolbar_layout"
+            app:title="@{@string/title_note_create}"
+            layout="@layout/toolbar_simple"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/tv_title"
+            android:hint="@string/note_title_tip"
+            android:textSize="24sp"
+            android:ellipsize="end"
+            android:textColor="?android:textColorPrimary"
+            android:maxLines="3"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:background="@null"
+            android:paddingVertical="8dp"
+            android:paddingHorizontal="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_layout"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_date_time"
+            tools:text="今天 12:00"
+            android:textSize="16sp"
+            android:textColor="@color/color_C"
+            android:paddingHorizontal="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/btn_note_type"
+            app:layout_constraintBottom_toBottomOf="@id/btn_note_type"
+            app:layout_constraintEnd_toStartOf="@id/btn_note_type"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/btn_note_type"
+            tools:text="开发"
+            android:textSize="14sp"
+            android:textColor="@color/color_dark"
+            android:gravity="center_vertical"
+            android:background="@drawable/shape_note_type_bg"
+            android:paddingVertical="5dp"
+            android:paddingHorizontal="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="6dp"
+            android:drawableEnd="@mipmap/ic_arrow_down"
+            app:layout_constraintStart_toEndOf="@id/tv_date_time"
+            app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="@dimen/corner_radius_default"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_note_type"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_note"
+                android:hint="@string/note_content_tip"
+                android:textSize="18sp"
+                android:textColor="?android:textColorPrimary"
+                android:background="@null"
+                android:gravity="start|top"
+                android:padding="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical" />
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

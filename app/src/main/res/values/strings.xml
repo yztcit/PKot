@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">皮卡丘</string>
+    <string name="app_flag">never too late to learn</string>
 
     <string name="empty_data">暂无数据</string>
 
@@ -11,6 +12,9 @@
 
     <string name="title_home">@string/navi_home</string>
     <string name="title_note">@string/navi_note</string>
+    <string name="title_note_create">新建笔记</string>
+    <string name="note_title_tip">标题</string>
+    <string name="note_content_tip">文本</string>
 
     <string name="drawer_open">打开抽屉</string>
     <string name="drawer_close">关闭抽屉</string>
@@ -36,4 +40,5 @@
     <string name="note_menu_layout">切换视图</string>
     <string name="note_menu_del_multi">批量删除</string>
     <string name="note_menu_sort_by">排序方式</string>
+    <string name="note_menu_tick">tick</string>
 </resources>

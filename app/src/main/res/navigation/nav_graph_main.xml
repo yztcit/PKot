@@ -39,7 +39,21 @@
         android:id="@+id/fragment_note"
         android:name="com.nttn.pkot.view.feature.NoteFragment"
         android:label="@string/navi_note"
-        tools:layout="@layout/fragment_note" />
+        tools:layout="@layout/fragment_note">
+
+        <action
+            android:id="@+id/action_to_create_note"
+            app:destination="@id/activity_note_create"
+            app:popUpToInclusive="false"
+            app:popUpTo="@id/fragment_note"
+            app:launchSingleTop="true" />
+    </fragment>
+    <activity
+        android:id="@+id/activity_note_create"
+        android:name="com.nttn.pkot.view.feature.note.NoteCreateActivity"
+        android:label="@string/title_note_create"
+        tools:layout="@layout/activity_note_create" />
+
 
     <fragment
         android:id="@+id/fragment_store"

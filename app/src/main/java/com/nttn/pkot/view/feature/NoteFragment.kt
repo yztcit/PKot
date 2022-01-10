@@ -4,7 +4,9 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.blankj.utilcode.util.ToastUtils
 import com.nttn.pkot.CuzApplication
@@ -12,19 +14,19 @@ import com.nttn.pkot.NoteFragmentBinding
 import com.nttn.pkot.R
 import com.nttn.pkot.base.BaseVBFragment
 import com.nttn.pkot.data.room.Note
-import com.nttn.pkot.view.adapter.DataAdapter
+import com.nttn.pkot.view.adapter.NoteAdapter
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.MaterialHeader
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.launch
-import java.util.*
+import kotlinx.coroutines.withContext
 
 @ExperimentalCoroutinesApi
 class NoteFragment : BaseVBFragment<NoteFragmentBinding>() {
-    private val mAdapter = DataAdapter(arrayListOf())
+    private val mNotes = MutableLiveData<ArrayList<Note>>(arrayListOf())
+    private val mAdapter = NoteAdapter(mNotes.value!!)
 
     override fun getLayoutId() = R.layout.fragment_note
 
@@ -58,12 +60,16 @@ class NoteFragment : BaseVBFragment<NoteFragmentBinding>() {
         }
 
         mBinding.floating.setOnClickListener {
-            ToastUtils.showShort("todo: 跳转新建笔记页面")
-            lifecycleScope.launch(Dispatchers.IO) {
-                val note = Note(1, "test", Date(), "test room db")
-                CuzApplication.obtainDB().noteDao().insertNote(note)
+            findNavController().navigate(NavFragmentDirections.actionToCreateNote())
+        }
+
+        lifecycleScope.launchWhenCreated {
+            withContext(Dispatchers.IO) {
+                mNotes.postValue(CuzApplication.obtainDB().noteDao().getAllNotes() as ArrayList<Note>)
             }
         }
+
+        mNotes.observe(this) { mAdapter.refreshData(it) }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

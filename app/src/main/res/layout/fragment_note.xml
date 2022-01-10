@@ -25,7 +25,7 @@
                 android:id="@+id/recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:listitem="@layout/item_user_layout"
+                tools:listitem="@layout/item_note_layout"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
         </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
