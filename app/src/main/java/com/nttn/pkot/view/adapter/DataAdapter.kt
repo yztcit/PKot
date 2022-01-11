@@ -6,9 +6,7 @@ import com.nttn.pkot.UserItemBinding
 import com.nttn.pkot.base.AbstractVBAdapter
 import com.nttn.pkot.data.model.SampleData
 import com.nttn.pkot.view.feature.DetailActivity
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-@ExperimentalCoroutinesApi
 class DataAdapter(sampleData: ArrayList<SampleData>) :
     AbstractVBAdapter<SampleData, UserItemBinding>(sampleData, listener = { view, position ->
         DetailActivity.seeDetail(view.context, sampleData[position])

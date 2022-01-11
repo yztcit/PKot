@@ -18,11 +18,9 @@ import com.blankj.utilcode.util.ToastUtils
 import com.nttn.pkot.BaseMarkBinding
 import com.nttn.pkot.GlobalHelper
 import com.nttn.pkot.R
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.lang.reflect.ParameterizedType
 import kotlin.system.exitProcess
 
-@ExperimentalCoroutinesApi
 abstract class BaseVBActivity<VB : ViewDataBinding, VM : BaseViewModel> : AppCompatActivity() {
     lateinit var mBinding: VB
     lateinit var mViewModel: VM

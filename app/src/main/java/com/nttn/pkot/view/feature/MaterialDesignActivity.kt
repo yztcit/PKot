@@ -17,11 +17,9 @@ import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.MaterialHeader
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-@ExperimentalCoroutinesApi
 class MaterialDesignActivity : BaseVBActivity<TestLifecycleBinding, MainViewModel>() {
     private val mAdapter = DataAdapter(arrayListOf())
 

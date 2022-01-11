@@ -8,9 +8,7 @@ import com.nttn.pkot.R
 import com.nttn.pkot.base.BaseVBActivity
 import com.nttn.pkot.base.BaseViewModel
 import com.nttn.pkot.data.model.SampleData
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-@ExperimentalCoroutinesApi
 class DetailActivity : BaseVBActivity<DetailActBinding, BaseViewModel>() {
     companion object {
         fun seeDetail(context: Context, sampleData: SampleData) {
