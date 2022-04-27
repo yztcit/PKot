@@ -14,6 +14,7 @@ void applyAndroidExtensions(Project project) {
             targetSdkVersion 30
 
             testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+            consumerProguardFiles "consumer-rules.pro"
         }
 
         compileOptions {
@@ -31,5 +32,4 @@ void applyAndroidExtensions(Project project) {
 
 ext {
     applyAndroidExtensions = this.&applyAndroidExtensions
-    //applyDependencies = this.&applyDependencies
 }
