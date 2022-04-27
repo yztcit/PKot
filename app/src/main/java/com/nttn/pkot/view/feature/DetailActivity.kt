@@ -5,8 +5,8 @@ import android.content.Intent
 import com.bumptech.glide.Glide
 import com.nttn.pkot.DetailActBinding
 import com.nttn.pkot.R
-import com.nttn.pkot.base.BaseVBActivity
-import com.nttn.pkot.base.BaseViewModel
+import com.nttn.baselib.base.BaseVBActivity
+import com.nttn.baselib.base.BaseViewModel
 import com.nttn.pkot.data.model.SampleData
 
 class DetailActivity : BaseVBActivity<DetailActBinding, BaseViewModel>() {

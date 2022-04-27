@@ -1,11 +1,10 @@
-package com.nttn.pkot.util
+package com.nttn.baselib.util
 
 import android.content.Context
 import android.graphics.*
 import android.os.Handler
 import android.os.Message
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel

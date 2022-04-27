@@ -1,4 +1,4 @@
-package com.nttn.pkot.base
+package com.nttn.baselib.base
 
 import android.os.Build
 import android.os.Bundle
@@ -15,9 +15,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.ToastUtils
-import com.nttn.pkot.BaseMarkBinding
-import com.nttn.pkot.GlobalHelper
-import com.nttn.pkot.R
+import com.nttn.baselib.BaseMarkBinding
+import com.nttn.baselib.GlobalHelper
+import com.nttn.baselib.R
 import java.lang.reflect.ParameterizedType
 import kotlin.system.exitProcess
 

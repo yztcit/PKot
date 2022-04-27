@@ -6,7 +6,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.blankj.utilcode.util.LogUtils
-import com.nttn.pkot.CuzApplication
+import com.nttn.baselib.BaseApplication
 
 @Database(entities = [Note::class], version = 1, exportSchema = false)
 @TypeConverters(DateConvert::class)
@@ -15,7 +15,7 @@ abstract class PkotDatabase : RoomDatabase() {
     companion object {
         var aDatabase: PkotDatabase =
             //如果databaseBuilder改为inMemoryDatabaseBuilder则创建一个内存数据库（进程销毁后，数据丢失）
-            Room.databaseBuilder(CuzApplication.sApplication, PkotDatabase::class.java, "pkot_data")
+            Room.databaseBuilder(BaseApplication.sApplication, PkotDatabase::class.java, "pkot_data")
                 //是否允许在主线程进行查询
                 //.allowMainThreadQueries()
                 //数据库创建和打开后的回调，可以重写其中的方法

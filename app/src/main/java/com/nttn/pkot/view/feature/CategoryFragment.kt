@@ -2,7 +2,7 @@ package com.nttn.pkot.view.feature
 
 import com.nttn.pkot.CategoryFragBinding
 import com.nttn.pkot.R
-import com.nttn.pkot.base.BaseVBFragment
+import com.nttn.baselib.base.BaseVBFragment
 
 class CategoryFragment: BaseVBFragment<CategoryFragBinding>() {
 

@@ -4,8 +4,8 @@ import android.content.Context
 import android.content.Intent
 import com.nttn.pkot.PrimaryActivityBinding
 import com.nttn.pkot.R
-import com.nttn.pkot.base.BaseVBActivity
-import com.nttn.pkot.base.BaseViewModel
+import com.nttn.baselib.base.BaseVBActivity
+import com.nttn.baselib.base.BaseViewModel
 import com.nttn.pkot.view.feature.MaterialDesignActivity
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlin.random.Random

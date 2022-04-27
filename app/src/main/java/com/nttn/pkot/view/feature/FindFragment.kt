@@ -2,7 +2,7 @@ package com.nttn.pkot.view.feature
 
 import com.nttn.pkot.FindFragBinding
 import com.nttn.pkot.R
-import com.nttn.pkot.base.BaseVBFragment
+import com.nttn.baselib.base.BaseVBFragment
 
 class FindFragment : BaseVBFragment<FindFragBinding>() {
 

@@ -1,7 +1,7 @@
-package com.nttn.pkot.base
+package com.nttn.baselib.base
 
 import androidx.lifecycle.ViewModel
-import com.nttn.pkot.view.intent.MainIntent
+import com.nttn.baselib.intent.MainIntent
 import kotlinx.coroutines.channels.Channel
 
 open class BaseViewModel(var showWatermark: Boolean = true) : ViewModel() {

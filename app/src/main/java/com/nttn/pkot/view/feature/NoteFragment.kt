@@ -12,7 +12,7 @@ import com.blankj.utilcode.util.ToastUtils
 import com.nttn.pkot.CuzApplication
 import com.nttn.pkot.NoteFragmentBinding
 import com.nttn.pkot.R
-import com.nttn.pkot.base.BaseVBFragment
+import com.nttn.baselib.base.BaseVBFragment
 import com.nttn.pkot.data.room.Note
 import com.nttn.pkot.view.adapter.NoteAdapter
 import com.scwang.smart.refresh.footer.ClassicsFooter

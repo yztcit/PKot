@@ -9,8 +9,8 @@ import com.blankj.utilcode.util.ToastUtils
 import com.nttn.pkot.CuzApplication
 import com.nttn.pkot.NoteCreateBinding
 import com.nttn.pkot.R
-import com.nttn.pkot.base.BaseVBActivity
-import com.nttn.pkot.base.BaseViewModel
+import com.nttn.baselib.base.BaseVBActivity
+import com.nttn.baselib.base.BaseViewModel
 import com.nttn.pkot.data.room.Note
 import kotlinx.coroutines.*
 import java.util.*

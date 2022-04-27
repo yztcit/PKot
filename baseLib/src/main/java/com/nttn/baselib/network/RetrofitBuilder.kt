@@ -1,6 +1,6 @@
-package com.nttn.pkot.data
+package com.nttn.baselib.network
 
-import com.nttn.pkot.base.BaseApiService
+import com.nttn.baselib.base.BaseApiService
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory

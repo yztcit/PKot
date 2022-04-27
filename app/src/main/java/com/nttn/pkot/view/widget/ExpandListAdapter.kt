@@ -7,7 +7,7 @@ import com.blankj.utilcode.util.ToastUtils
 import com.nttn.pkot.ExpandFloorBinding
 import com.nttn.pkot.ExpandRoomBinding
 import com.nttn.pkot.R
-import com.nttn.pkot.base.AbstractVBAdapter
+import com.nttn.baselib.base.AbstractVBAdapter
 import com.nttn.pkot.data.model.MainData
 
 class ExpandListAdapter(

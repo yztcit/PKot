@@ -1,4 +1,4 @@
-package com.nttn.pkot.view.intent
+package com.nttn.baselib.intent
 
 sealed class MainIntent {
     object Refresh: MainIntent()

@@ -1,9 +1,9 @@
 package com.nttn.pkot.view.viewmodel
 
 import androidx.lifecycle.viewModelScope
-import com.nttn.pkot.base.BaseViewModel
+import com.nttn.baselib.base.BaseViewModel
 import com.nttn.pkot.data.repository.MainRepository
-import com.nttn.pkot.view.intent.MainIntent
+import com.nttn.baselib.intent.MainIntent
 import com.nttn.pkot.view.viewstate.MainState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

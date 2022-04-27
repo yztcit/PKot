@@ -3,7 +3,7 @@ package com.nttn.pkot.view.adapter
 import android.content.Intent
 import android.view.View
 import com.nttn.pkot.R
-import com.nttn.pkot.base.AbstractVBAdapter
+import com.nttn.baselib.base.AbstractVBAdapter
 import com.nttn.pkot.data.model.MainData
 import com.nttn.pkot.databinding.MainItemBinding
 

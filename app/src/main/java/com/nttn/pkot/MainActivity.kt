@@ -3,8 +3,8 @@ package com.nttn.pkot
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
-import com.nttn.pkot.base.BaseVBActivity
-import com.nttn.pkot.base.BaseViewModel
+import com.nttn.baselib.base.BaseVBActivity
+import com.nttn.baselib.base.BaseViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi

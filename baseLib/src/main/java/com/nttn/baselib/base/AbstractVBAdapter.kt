@@ -1,4 +1,4 @@
-package com.nttn.pkot.base
+package com.nttn.baselib.base
 
 import android.view.LayoutInflater
 import android.view.View
@@ -51,8 +51,8 @@ abstract class AbstractVBAdapter<T, VB : ViewDataBinding>(
 
     fun clearAll() {
         data?.apply {
+            notifyItemRangeRemoved(0, itemCount)
             clear()
-            notifyDataSetChanged()
         }
     }
 
@@ -68,7 +68,7 @@ abstract class AbstractVBAdapter<T, VB : ViewDataBinding>(
         data?.run {
             clear()
             addAll(list)
-            notifyDataSetChanged()
+            notifyItemRangeChanged(0, itemCount, null)
         }
     }
 }

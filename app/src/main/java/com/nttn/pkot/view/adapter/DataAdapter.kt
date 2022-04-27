@@ -3,7 +3,7 @@ package com.nttn.pkot.view.adapter
 import com.bumptech.glide.Glide
 import com.nttn.pkot.R
 import com.nttn.pkot.UserItemBinding
-import com.nttn.pkot.base.AbstractVBAdapter
+import com.nttn.baselib.base.AbstractVBAdapter
 import com.nttn.pkot.data.model.SampleData
 import com.nttn.pkot.view.feature.DetailActivity
 

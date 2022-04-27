@@ -1,4 +1,4 @@
-package com.nttn.pkot.base
+package com.nttn.baselib.base
 
 import android.os.Bundle
 import android.view.LayoutInflater

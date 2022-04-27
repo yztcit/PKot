@@ -1,10 +1,10 @@
-package com.nttn.pkot
+package com.nttn.baselib
 
 import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.blankj.utilcode.util.ScreenUtils
-import com.nttn.pkot.util.drawWatermarkText
+import com.nttn.baselib.util.drawWatermarkText
 
 object GlobalHelper {
     /* ↓↓↓ 水印 ↓↓↓ */
@@ -13,7 +13,7 @@ object GlobalHelper {
     val watermark: LiveData<Bitmap> get() = markLiveData
 
     fun generateWatermark(text: String) {
-        if (this.text == text && markLiveData.value != null) return
+        if (GlobalHelper.text == text && markLiveData.value != null) return
         markLiveData.value = drawWatermarkText(text, ScreenUtils.getScreenWidth(), ScreenUtils.getScreenHeight())
     }
 

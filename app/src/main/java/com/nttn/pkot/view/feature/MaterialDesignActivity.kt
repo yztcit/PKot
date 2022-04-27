@@ -5,11 +5,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.blankj.utilcode.util.ToastUtils
 import com.nttn.pkot.R
 import com.nttn.pkot.TestLifecycleBinding
-import com.nttn.pkot.base.BaseVBActivity
-import com.nttn.pkot.data.RetrofitBuilder
+import com.nttn.baselib.base.BaseVBActivity
+import com.nttn.baselib.network.RetrofitBuilder
 import com.nttn.pkot.data.api.ApiHelperImpl
 import com.nttn.pkot.view.adapter.DataAdapter
-import com.nttn.pkot.view.intent.MainIntent
+import com.nttn.baselib.intent.MainIntent
 import com.nttn.pkot.view.viewmodel.MainViewModel
 import com.nttn.pkot.view.viewmodel.ViewModelFactory
 import com.nttn.pkot.view.viewstate.MainState

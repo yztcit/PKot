@@ -5,7 +5,7 @@ import android.view.animation.DecelerateInterpolator
 import androidx.navigation.fragment.findNavController
 import com.nttn.pkot.R
 import com.nttn.pkot.SplashFragmentBinding
-import com.nttn.pkot.base.BaseVBFragment
+import com.nttn.baselib.base.BaseVBFragment
 
 class SplashFragment : BaseVBFragment<SplashFragmentBinding>() {
 
