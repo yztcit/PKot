@@ -63,13 +63,16 @@ class NoteFragment : BaseVBFragment<NoteFragmentBinding>() {
             findNavController().navigate(NavFragmentDirections.actionToCreateNote())
         }
 
-        lifecycleScope.launchWhenCreated {
+        mNotes.observe(this) { mAdapter.refreshData(it) }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        lifecycleScope.launchWhenStarted {
             withContext(Dispatchers.IO) {
                 mNotes.postValue(CuzApplication.obtainDB().noteDao().getAllNotes() as ArrayList<Note>)
             }
         }
-
-        mNotes.observe(this) { mAdapter.refreshData(it) }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

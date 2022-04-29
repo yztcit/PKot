@@ -13,9 +13,13 @@ import com.nttn.baselib.BaseApplication
 abstract class PkotDatabase : RoomDatabase() {
 
     companion object {
-        var aDatabase: PkotDatabase =
+        fun initDatabase(dbName: String = "pkot_data"): PkotDatabase =
             //如果databaseBuilder改为inMemoryDatabaseBuilder则创建一个内存数据库（进程销毁后，数据丢失）
-            Room.databaseBuilder(BaseApplication.sApplication, PkotDatabase::class.java, "pkot_data")
+            Room.databaseBuilder(
+                BaseApplication.sApplication,
+                PkotDatabase::class.java,
+                dbName
+            )
                 //是否允许在主线程进行查询
                 //.allowMainThreadQueries()
                 //数据库创建和打开后的回调，可以重写其中的方法

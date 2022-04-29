@@ -13,7 +13,7 @@ class CuzApplication : BaseApplication() {
             return if (this::sDataBase.isInitialized) {
                 sDataBase
             } else GlobalScope.async {
-                sDataBase = PkotDatabase.aDatabase
+                sDataBase = PkotDatabase.initDatabase()
                 return@async sDataBase
             }.await()
         }

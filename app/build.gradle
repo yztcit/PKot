@@ -24,6 +24,8 @@ android {
 }
 
 dependencies {
+    implementation fileTree(dir: 'libs', includes: ['*.jar'])
+
     implementation project(':baseLib')
 
     //Room

@@ -39,4 +39,7 @@
     <string name="note_menu_del_multi">批量删除</string>
     <string name="note_menu_sort_by">排序方式</string>
     <string name="note_menu_tick">tick</string>
+
+    <!-- 单据记录 -->
+    <string name="receipt_title">单据记录</string>
 </resources>

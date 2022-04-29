@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.nttn.pkot">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:name=".CuzApplication"
         android:allowBackup="false"
@@ -36,6 +40,10 @@
 
         <activity
             android:name=".view.feature.note.NoteCreateActivity"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name=".view.feature.handwrite.ReceiptsActivity"
             android:launchMode="singleTop" />
     </application>
 
