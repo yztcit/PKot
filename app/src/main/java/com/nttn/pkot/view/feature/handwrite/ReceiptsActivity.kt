@@ -1,42 +1,44 @@
 package com.nttn.pkot.view.feature.handwrite
 
+import android.Manifest
 import android.graphics.Bitmap
 import android.util.Base64
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.Navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.cloudapi.sdk.constant.SdkConstant
 import com.alibaba.cloudapi.sdk.signature.SignerFactoryManager
-import com.alibaba.cloudapi.sdk.util.SignUtil
 import com.blankj.utilcode.util.GsonUtils
 import com.blankj.utilcode.util.ImageUtils
-import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.nttn.baselib.base.BaseVBActivity
 import com.nttn.baselib.base.BaseViewModel
 import com.nttn.baselib.network.RetrofitBuilder
-import com.nttn.pkot.CuzApplication
 import com.nttn.pkot.R
 import com.nttn.pkot.ReceiptsActivityBinding
 import com.nttn.pkot.data.api.ApiHelperImpl
 import com.nttn.pkot.data.repository.MainRepository
-import com.nttn.pkot.view.feature.NavFragmentDirections
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.MaterialHeader
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class ReceiptsActivity : BaseVBActivity<ReceiptsActivityBinding, BaseViewModel>() {
     private val mReceipts = MutableLiveData<ArrayList<PrismWordsInfo>>(arrayListOf())
     private lateinit var mAdapter: ReceiptAdapter
+
+    private val cameraPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+            if (it) {
+                scanReceipt()
+            } else {
+                ToastUtils.showShort("相机权限申请失败")
+            }
+        }
 
     override fun getLayoutId(): Int = R.layout.activity_receipts
 
@@ -69,15 +71,13 @@ class ReceiptsActivity : BaseVBActivity<ReceiptsActivityBinding, BaseViewModel>(
         }
 
         mBinding.floating.setOnClickListener {
-            ToastUtils.showShort("扫描单据")
+            cameraPermissionLauncher.launch(Manifest.permission.CAMERA)
             //findNavController(it).navigate(NavFragmentDirections.actionToCreateNote())
         }
 
         mReceipts.observe(this) {
             mAdapter.refreshData(it)
         }
-
-        scanReceipt()
     }
 
     private fun scanReceipt() {
