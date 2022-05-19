@@ -31,10 +31,14 @@ class ReceiptsActivity : BaseVBActivity<ReceiptsActivityBinding, BaseViewModel>(
     private val mReceipts = MutableLiveData<ArrayList<PrismWordsInfo>>(arrayListOf())
     private lateinit var mAdapter: ReceiptAdapter
 
+    private val takePictureLauncher = registerForActivityResult(ActivityResultContracts.TakePicturePreview()) {
+        bitmap -> scanReceipt(bitmap)
+    }
+
     private val cameraPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) {
             if (it) {
-                scanReceipt()
+                takePictureLauncher.launch(null)
             } else {
                 ToastUtils.showShort("相机权限申请失败")
             }
@@ -80,10 +84,10 @@ class ReceiptsActivity : BaseVBActivity<ReceiptsActivityBinding, BaseViewModel>(
         }
     }
 
-    private fun scanReceipt() {
+    private fun scanReceipt(bitmap: Bitmap) {
         lifecycleScope.launch {
-            val drawable2Bytes = ImageUtils.drawable2Bytes(
-                resources.getDrawable(R.drawable.doc),
+            val drawable2Bytes = ImageUtils.bitmap2Bytes(
+                bitmap,
                 Bitmap.CompressFormat.JPEG,
                 100
             )
@@ -93,7 +97,6 @@ class ReceiptsActivity : BaseVBActivity<ReceiptsActivityBinding, BaseViewModel>(
             ).toByteArray(SdkConstant.CLOUDAPI_ENCODING)
 
             mReceipts.postValue(
-                // TODO: 扫描单据
                 MainRepository(ApiHelperImpl(RetrofitBuilder.createService()))
                     .handwrite(toByteArray).prism_wordsInfo as ArrayList<PrismWordsInfo>?
             )
