@@ -19,7 +19,8 @@
         android:theme="@style/Theme.PKot"
         tools:targetApi="n">
 
-        <activity android:name=".EntryActivity">
+        <activity android:name=".EntryActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

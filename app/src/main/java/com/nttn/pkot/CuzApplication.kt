@@ -2,8 +2,8 @@ package com.nttn.pkot
 
 import com.nttn.baselib.BaseApplication
 import com.nttn.pkot.data.room.PkotDatabase
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class CuzApplication : BaseApplication() {
 
@@ -12,10 +12,10 @@ class CuzApplication : BaseApplication() {
         suspend fun obtainDB(): PkotDatabase {
             return if (this::sDataBase.isInitialized) {
                 sDataBase
-            } else GlobalScope.async {
+            } else withContext(Dispatchers.Default) {
                 sDataBase = PkotDatabase.initDatabase()
-                return@async sDataBase
-            }.await()
+                return@withContext sDataBase
+            }
         }
     }
 
